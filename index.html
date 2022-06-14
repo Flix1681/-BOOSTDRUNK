@@ -4,25 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
   <title>My LIFF App</title>
-  <style>
-    body { padding: 256px }
-    button { display: none; width: 50%; padding: 16px 0; margin: 16px auto }
-  </style>
 </head>
 <body>
-  <button id="btnShare" onclick="sendShare()">Share Target Picker</button>
-  <button id="btnLogin" onclick="liff.login()">Log In</button>
-  <button id="btnLogOut" onclick="logOut()">Log Out</button>
-  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-  <script>
-    async function sendShare() {
-      const result = await liff.shareTargetPicker([
-        {
-          "type": "flex",
-          "altText": "Flex Message",
-          "contents": 
-        //   โค้ด Flex Message จาก line bot designer
-        {
+    <script src="https://static.line-scdn.net/liff/edge/versions/2.5.0/sdk.js"></script>
+    <script>
+        async function main() {
+                                         // Liff ID
+            await liff.init({ liffId: "1657219683-8pe3Ebjp" })
+            await liff.shareTargetPicker([
+                {
+                    type: "flex",
+                    // ข้อความก่อนกดอ่าน
+                    altText: "ว่างไหม",
+                    contents: 
+                    // โค้ดจาก line bot designer
+                    {
   "type": "carousel",
   "contents": [
     {
@@ -177,40 +173,11 @@
     }
   ]
 }
+                }
+            ])
+            liff.closeWindow()
         }
-      ])
-      if (result) {
-        alert(`[${result.status}] Message sent!`)
-      } else {
-        const [majorVer, minorVer, patchVer] = (liff.getLineVersion() || "").split('.');
-
-        if (minorVer === undefined) {
-          alert('ShareTargetPicker was canceled in external browser')
-          return
-        }
-
-        if (parseInt(majorVer) >= 10 && parseInt(minorVer) >= 10 && parseInt(patchVer) > 0) {
-          alert('ShareTargetPicker was canceled in LINE app')
-        }
-      }
-    }
-    function logOut() {
-      liff.logout()
-      window.location.reload()
-    }
-    async function main() {
-                                 // Liff ID
-      await liff.init({ liffId: "YOUR-LIFF-ID" })
-      if (liff.isLoggedIn()) {
-        document.getElementById("btnShare").style.display = "block"
-        if (!liff.isInClient()) {
-          document.getElementById("btnLogOut").style.display = "block"
-        }
-      } else {
-        document.getElementById("btnLogin").style.display = "block"
-      }
-    }
-    main()
-  </script>
+        main()
+    </script>
 </body>
 </html>
