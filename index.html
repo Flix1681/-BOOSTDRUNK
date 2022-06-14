@@ -9,23 +9,21 @@
     <script src="https://static.line-scdn.net/liff/edge/versions/2.5.0/sdk.js"></script>
     <script>
         async function main() {
-                                         // Liff ID
             await liff.init({ liffId: "1657219683-8pe3Ebjp" })
             await liff.shareTargetPicker([
                 {
                     type: "flex",
                     // ข้อความก่อนกดอ่าน
-                    altText: "ทำไรอยู่",
+                    altText: "พี่ทำไรอยู่",
                     contents: 
-                    // โค้ดจาก line bot designer
-                    {
+                  {
   "type": "carousel",
   "contents": [
     {
       "type": "bubble",
       "hero": {
         "type": "image",
-        "url": "https://media.discordapp.net/attachments/984561363944874045/984561571139305552/02-01_4.jpeg?w=auto",
+        "url": "https://media.discordapp.net/attachments/984561363944874045/984561571139305552/02-01_4.jpeg",
         "margin": "none",
         "size": "full",
         "aspectRatio": "20:20",
@@ -92,7 +90,7 @@
       "direction": "ltr",
       "hero": {
         "type": "image",
-        "url": "https://media.discordapp.net/attachments/984561363944874045/984561534057455667/03-02-01.jpeg?w=auto",
+        "url": "https://media.discordapp.net/attachments/984561363944874045/984561534057455667/03-02-01.jpeg",
         "size": "full",
         "aspectRatio": "20:20",
         "aspectMode": "cover"
