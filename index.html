@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
+  <title>My LIFF App</title>
+  <style>
+    body { padding: 256px }
+    button { display: none; width: 50%; padding: 16px 0; margin: 16px auto }
+  </style>
+</head>
+<body>
+  <button id="btnShare" onclick="sendShare()">Share Target Picker</button>
+  <button id="btnLogin" onclick="liff.login()">Log In</button>
+  <button id="btnLogOut" onclick="logOut()">Log Out</button>
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <script>
+    async function sendShare() {
+      const result = await liff.shareTargetPicker([
+        {
+          "type": "flex",
+          "altText": "Flex Message",
+          "contents": 
+        //   โค้ด Flex Message จาก line bot designer
+        {
+  "type": "carousel",
+  "contents": [
+    {
+      "type": "bubble",
+      "hero": {
+        "type": "image",
+        "url": "https://media.discordapp.net/attachments/984561363944874045/984561571139305552/02-01_4.jpeg",
+        "margin": "none",
+        "size": "full",
+        "aspectRatio": "20:20",
+        "aspectMode": "fit"
+      },
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "spacing": "sm",
+        "contents": [
+          {
+            "type": "text",
+            "text": "แจกฟรี 50.-",
+            "weight": "bold",
+            "size": "xl",
+            "wrap": true,
+            "contents": []
+          },
+          {
+            "type": "box",
+            "layout": "baseline",
+            "contents": [
+              {
+                "type": "text",
+                "text": "ทำยอด 650 ถอนได้ 250",
+                "weight": "bold",
+                "size": "xl",
+                "flex": 0,
+                "wrap": true,
+                "contents": []
+              }
+            ]
+          }
+        ]
+      },
+      "footer": {
+        "type": "box",
+        "layout": "vertical",
+        "spacing": "sm",
+        "contents": [
+          {
+            "type": "button",
+            "action": {
+              "type": "uri",
+              "label": "รับเครดิตฟรี",
+              "uri": "https://liff.line.me/1645278921-kWRPP32q/?accountId=608fprlf"
+            },
+            "color": "#E900FFFF",
+            "style": "primary"
+          },
+          {
+            "type": "button",
+            "action": {
+              "type": "uri",
+              "label": "แชร์ให้เพื่อน",
+              "uri": "https://liff.line.me/1657219683-8pe3Ebjp"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "bubble",
+      "direction": "ltr",
+      "hero": {
+        "type": "image",
+        "url": "https://media.discordapp.net/attachments/984561363944874045/984561534057455667/03-02-01.jpeg",
+        "size": "full",
+        "aspectRatio": "20:20",
+        "aspectMode": "cover"
+      },
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "spacing": "sm",
+        "contents": [
+          {
+            "type": "text",
+            "text": "ฝาก 1,000 รับ 1,500",
+            "weight": "bold",
+            "size": "xl",
+            "wrap": true,
+            "contents": []
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "flex": 1,
+            "contents": [
+              {
+                "type": "text",
+                "text": "ฝาก 500 รับ 750",
+                "weight": "bold",
+                "size": "xl",
+                "flex": 0,
+                "wrap": true,
+                "contents": []
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "text": "ฝาก 100 รับ 150",
+            "weight": "bold",
+            "size": "xl",
+            "contents": []
+          },
+          {
+            "type": "text",
+            "text": "ทำเพียง 3 เทิร์น ถอนได้ 1 เทิร์น(รวมโบนัส)",
+            "size": "xxs",
+            "color": "#FF5551",
+            "flex": 0,
+            "margin": "md",
+            "wrap": true,
+            "contents": []
+          }
+        ]
+      },
+      "footer": {
+        "type": "box",
+        "layout": "horizontal",
+        "spacing": "sm",
+        "margin": "none",
+        "action": {
+          "type": "uri",
+          "label": "รับโปรโมชั่น",
+          "uri": "https://www.finalflix168.com/"
+        },
+        "position": "default",
+        "contents": [
+          {
+            "type": "button",
+            "action": {
+              "type": "uri",
+              "label": "รับโปรโมชั่น",
+              "uri": "https://www.finalflix168.com/"
+            },
+            "flex": 2,
+            "color": "#E900FFFF",
+            "style": "primary"
+          }
+        ]
+      }
+    }
+  ]
+}
+        }
+      ])
+      if (result) {
+        alert(`[${result.status}] Message sent!`)
+      } else {
+        const [majorVer, minorVer, patchVer] = (liff.getLineVersion() || "").split('.');
+
+        if (minorVer === undefined) {
+          alert('ShareTargetPicker was canceled in external browser')
+          return
+        }
+
+        if (parseInt(majorVer) >= 10 && parseInt(minorVer) >= 10 && parseInt(patchVer) > 0) {
+          alert('ShareTargetPicker was canceled in LINE app')
+        }
+      }
+    }
+    function logOut() {
+      liff.logout()
+      window.location.reload()
+    }
+    async function main() {
+                                 // Liff ID
+      await liff.init({ liffId: "YOUR-LIFF-ID" })
+      if (liff.isLoggedIn()) {
+        document.getElementById("btnShare").style.display = "block"
+        if (!liff.isInClient()) {
+          document.getElementById("btnLogOut").style.display = "block"
+        }
+      } else {
+        document.getElementById("btnLogin").style.display = "block"
+      }
+    }
+    main()
+  </script>
+</body>
+</html>
